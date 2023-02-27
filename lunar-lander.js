@@ -28,8 +28,8 @@ function drawStatic() {
   rect(-10, 600, 800, 35, 10);
   // rect(0, 550, 100, 30, 10);
   fill(187, 208, 255);
-  ellipse(50, 200, 100, 100);
-  ellipse(50, 550, 100, 100);
+  ellipse(50, 220, 100, 10);
+  ellipse(50, 560, 100, 10);
   verticalObstacle(100, 160, 0);
   verticalObstacle(515, 100, 80);
   verticalObstacle(460, 275, 80);
@@ -77,17 +77,34 @@ function spiningObstacle() {
   pop();
 }
 
-function draw() {
-  drawStatic();
-  drawMoving();
-  drawMovingHorizontal();
-  spiningObstacle();
-}
-
 // Rocket
-
+function rocket(x, y) {
+  push();
+  translate(40, 190);
+  rotate(20);
+  fill(0, 0, 0);
+  ellipse(x + 5, 20, 10, 30);
+  pop();
+  push();
+  translate(60, 190);
+  rotate(-20);
+  fill(0, 0, 0);
+  ellipse(-5, 20, 10, 30);
+  pop();
+  fill(255, 255, 255);
+  ellipse(50, 200, 20, 50);
+  fill(0, 0, 0);
+  ellipse(50, 185, 10, 10);
+}
 /* como fazer ele saber que bateu no que está girando
 pode ser fazendo vários círculos 
 ou pode ser com comparacao de cor - nao é muito efetivo
 porque faz o computador rodar muito
 ou movendo o background e deixando os obstaculos parados*/
+function draw() {
+  drawStatic();
+  drawMoving();
+  drawMovingHorizontal();
+  spiningObstacle();
+  rocket();
+}
