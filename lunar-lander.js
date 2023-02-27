@@ -11,8 +11,6 @@ function verticalObstacle(x, y, height) {
 
 // stars background
 
-// black hole
-
 // Horizontal obstacles
 function horizontalObstacle(x, y, height) {
   fill(200, 182, 255);
@@ -36,27 +34,27 @@ function drawStatic() {
 }
 
 // Draw moving verticalObstacle
-let y = 100;
-let speed = -3;
+let verticalY = 100;
+let verticalSpeed = -3;
 
 function drawMoving() {
-  verticalObstacle(300, y, 0);
+  verticalObstacle(300, verticalY, 0);
 
-  y = y - speed;
-  if (y > 160 || y < 10) {
-    speed = speed * -1;
+  verticalY = verticalY - verticalSpeed;
+  if (verticalY > 160 || verticalY < 10) {
+    verticalSpeed = verticalSpeed * -1;
   }
 }
 
 // Draw moving Horizontal obstacle
-let x = 600;
+let horizontalX = 600;
 let horizontalSpeed = 2;
 
 function drawMovingHorizontal() {
-  horizontalObstacle(x, 200, 0);
+  horizontalObstacle(horizontalX, 200, 0);
 
-  x = x - horizontalSpeed;
-  if (x > 710 || x < 540) {
+  horizontalX = horizontalX - horizontalSpeed;
+  if (horizontalX > 710 || horizontalX < 540) {
     horizontalSpeed = horizontalSpeed * -1;
   }
 }
@@ -78,33 +76,37 @@ function spiningObstacle() {
 }
 
 // Rocket
+
 function rocket(x, y) {
   push();
-  translate(40, 190);
+  translate(x, y);
   rotate(20);
   fill(0, 0, 0);
-  ellipse(x + 5, 20, 10, 30);
+  ellipse(-10, 10, 10, 30);
   pop();
   push();
-  translate(60, 190);
+  translate(x, y);
   rotate(-20);
   fill(0, 0, 0);
-  ellipse(-5, 20, 10, 30);
+  ellipse(10, 10, 10, 30);
   pop();
   fill(255, 255, 255);
-  ellipse(50, 200, 20, 50);
+  ellipse(x, y, 20, 50);
   fill(0, 0, 0);
-  ellipse(50, 185, 10, 10);
+  ellipse(x, y - 15, 10, 10);
 }
-/* como fazer ele saber que bateu no que está girando
-pode ser fazendo vários círculos 
-ou pode ser com comparacao de cor - nao é muito efetivo
-porque faz o computador rodar muito
-ou movendo o background e deixando os obstaculos parados*/
+
+// Draw everything
 function draw() {
   drawStatic();
   drawMoving();
   drawMovingHorizontal();
   spiningObstacle();
-  rocket();
+  rocket(50, 200);
 }
+
+/* como fazer ele saber que bateu no que está girando
+pode ser fazendo vários círculos 
+ou pode ser com comparacao de cor - nao é muito efetivo
+porque faz o computador rodar muito
+ou movendo o background e deixando os obstaculos parados*/
