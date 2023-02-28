@@ -6,14 +6,14 @@ function setup() {
   createCanvas(800, 650);
 }
 
+isGameActive = false;
+
 // Vertical obstacles
 function verticalObstacle(x, y, height) {
   fill(200, 182, 255);
   noStroke();
   rect(x, y, 30, 100 + height, 10);
 }
-
-// stars background
 
 // Horizontal obstacles
 function horizontalObstacle(x, y, height) {
@@ -28,69 +28,70 @@ function drawStatic() {
   fill(200, 182, 255);
   rect(-10, 250, 555, 35, 10);
   rect(-10, 600, 800, 35, 10);
-  // rect(0, 550, 100, 30, 10);
   fill(187, 208, 255);
   ellipse(50, 20, 100, 10);
   ellipse(50, 560, 100, 10);
   verticalObstacle(100, 160, 0);
   verticalObstacle(515, 100, 80);
   verticalObstacle(460, 275, 80);
+  verticalObstacle(320, 430, 80);
+  verticalObstacle(300, 0, 40);
+  horizontalObstacle(700, 150, 1);
+  horizontalObstacle(550, 300, 1);
 }
 
 // Draw moving verticalObstacle
-let verticalY = 100;
-let verticalSpeed = -3;
+// let verticalY = 100;
+// let verticalSpeed = -3;
 
-function drawMoving() {
-  verticalObstacle(300, verticalY, 0);
+// function drawMoving() {
+//   verticalObstacle(300, verticalY, 0);
 
-  verticalY = verticalY - verticalSpeed;
-  if (verticalY > 160 || verticalY < 10) {
-    verticalSpeed = verticalSpeed * -1;
-  }
-}
+//   verticalY = verticalY - verticalSpeed;
+//   if (verticalY > 160 || verticalY < 10) {
+//     verticalSpeed = verticalSpeed * -1;
+//   }
+// }
 
-// Draw moving Horizontal obstacle
-let horizontalX = 600;
-let horizontalSpeed = 2;
+// // Draw moving Horizontal obstacle
+// let horizontalX = 600;
+// let horizontalSpeed = 2;
 
-function drawMovingHorizontal() {
-  horizontalObstacle(horizontalX, 200, 0);
+// function drawMovingHorizontal() {
+//   horizontalObstacle(horizontalX, 200, 0);
 
-  horizontalX = horizontalX - horizontalSpeed;
-  if (horizontalX > 710 || horizontalX < 540) {
-    horizontalSpeed = horizontalSpeed * -1;
-  }
-}
+//   horizontalX = horizontalX - horizontalSpeed;
+//   if (horizontalX > 710 || horizontalX < 540) {
+//     horizontalSpeed = horizontalSpeed * -1;
+//   }
+// }
 
 // Draw spining whell
 /* Learned from p5.js - 
 https://editor.p5js.org/chjno/sketches/SJ2gSkAt-*/
 
-let angle = 0;
-function spiningObstacle() {
-  push();
-  translate(250, 445);
-  angleMode(DEGREES);
-  rotate(angle);
-  rectMode(CENTER);
-  rect(0, 0, 200, 30, 10);
-  angle = angle + 1;
-  pop();
-}
+// let angle = 0;
+// function spiningObstacle() {
+//   push();
+//   translate(250, 445);
+//   angleMode(DEGREES);
+//   rotate(angle);
+//   rectMode(CENTER);
+//   rect(0, 0, 200, 30, 10);
+//   angle = angle + 1;
+//   pop();
+// }
 
 // Rocket
 
 function rocket(x, y) {
   push();
   translate(x, y);
-  rotate(20);
   fill(255, 214, 255);
   ellipse(-10, 10, 10, 30);
   pop();
   push();
   translate(x, y);
-  rotate(-20);
   fill(255, 214, 255);
   ellipse(10, 10, 10, 30);
   pop();
@@ -103,8 +104,8 @@ function rocket(x, y) {
 // Making the rocket move
 let rocketX = 50;
 let rocketY = 50;
-let rocketVelocity = 1;
-let rocketAcceleration = 0.1;
+let rocketVelocity = 0.3;
+let rocketAcceleration = 0.01;
 
 function movingRocket() {
   rocket(rocketX, rocketY);
@@ -112,20 +113,34 @@ function movingRocket() {
   rocketY = rocketY + rocketVelocity;
 
   if (keyIsDown(38)) {
-    rocketY = rocketY - 20;
+    rocketY = rocketY - 10;
   } else if (keyIsDown(39)) {
-    rocketX = rocketX + 30;
+    rocketX = rocketX + 10;
   } else if (keyIsDown(37)) {
-    rocketX = rocketX - 7;
+    rocketX = rocketX - 10;
   }
 }
+
+function start() {
+  if (isGameActive === false) {
+    // text with for starting page with the command to start
+  }
+}
+
+function gameWon() {}
+
+function gameLost() {}
+
+function restartGame() {}
+
+//collision part
 
 // Draw everything
 function draw() {
   drawStatic();
-  drawMoving();
-  drawMovingHorizontal();
-  spiningObstacle();
+  // drawMoving();
+  // drawMovingHorizontal();
+  // spiningObstacle();
   movingRocket();
 }
 
