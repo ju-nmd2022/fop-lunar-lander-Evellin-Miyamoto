@@ -2,6 +2,10 @@
 Foundations of Programming - Jönköping University
 Evellin Miyamoto */
 
+function setup() {
+  createCanvas(800, 650);
+}
+
 // Vertical obstacles
 function verticalObstacle(x, y, height) {
   fill(200, 182, 255);
@@ -26,7 +30,7 @@ function drawStatic() {
   rect(-10, 600, 800, 35, 10);
   // rect(0, 550, 100, 30, 10);
   fill(187, 208, 255);
-  ellipse(50, 220, 100, 10);
+  ellipse(50, 20, 100, 10);
   ellipse(50, 560, 100, 10);
   verticalObstacle(100, 160, 0);
   verticalObstacle(515, 100, 80);
@@ -81,19 +85,39 @@ function rocket(x, y) {
   push();
   translate(x, y);
   rotate(20);
-  fill(0, 0, 0);
+  fill(255, 214, 255);
   ellipse(-10, 10, 10, 30);
   pop();
   push();
   translate(x, y);
   rotate(-20);
-  fill(0, 0, 0);
+  fill(255, 214, 255);
   ellipse(10, 10, 10, 30);
   pop();
-  fill(255, 255, 255);
+  fill(247, 37, 133);
   ellipse(x, y, 20, 50);
-  fill(0, 0, 0);
+  fill(255, 214, 255);
   ellipse(x, y - 15, 10, 10);
+}
+
+// Making the rocket move
+let rocketX = 50;
+let rocketY = 50;
+let rocketVelocity = 1;
+let rocketAcceleration = 0.1;
+
+function movingRocket() {
+  rocket(rocketX, rocketY);
+  rocketVelocity = rocketVelocity + rocketAcceleration;
+  rocketY = rocketY + rocketVelocity;
+
+  if (keyIsDown(38)) {
+    rocketY = rocketY - 20;
+  } else if (keyIsDown(39)) {
+    rocketX = rocketX + 30;
+  } else if (keyIsDown(37)) {
+    rocketX = rocketX - 7;
+  }
 }
 
 // Draw everything
@@ -102,7 +126,7 @@ function draw() {
   drawMoving();
   drawMovingHorizontal();
   spiningObstacle();
-  rocket(50, 200);
+  movingRocket();
 }
 
 /* como fazer ele saber que bateu no que está girando
