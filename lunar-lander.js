@@ -1,12 +1,11 @@
 /* Lunar lander game 
 Foundations of Programming - Jönköping University
 Evellin Miyamoto */
+isGameActive = false;
 
 function setup() {
   createCanvas(800, 650);
 }
-
-isGameActive = false;
 
 // Vertical obstacles
 function verticalObstacle(x, y, height) {
@@ -106,7 +105,6 @@ let rocketX = 50;
 let rocketY = 50;
 let rocketVelocity = 0.3;
 let rocketAcceleration = 0.01;
-
 function movingRocket() {
   rocket(rocketX, rocketY);
   rocketVelocity = rocketVelocity + rocketAcceleration;
@@ -121,17 +119,44 @@ function movingRocket() {
   }
 }
 
-function start() {
-  if (isGameActive === false) {
-    // text with for starting page with the command to start
-  }
+function startScreen() {
+  background(255, 255, 255);
+  fill(0, 0, 0);
+  textSize(60);
+  text("Land the Rocket!", 150, 200);
+  push();
+  textSize(25);
+  text("Use arrow up to control the velocity", 180, 300);
+  text("Move the rocket with arrow right", 190, 360);
+  pop();
+  push();
+  textSize(40);
+  text("To start the game press spacebar", 80, 500);
 }
 
-function gameWon() {}
+function gameWon() {
+  background(255, 255, 255);
+  fill(0, 0, 0);
+  textSize(80);
+  text("You won!!", 220, 300);
+  push();
+  textSize(40);
+  text("Start again", 300, 380);
+  text("Press space bar", 260, 420);
+  pop();
+}
 
-function gameLost() {}
-
-function restartGame() {}
+function gameLost() {
+  background(0, 0, 0);
+  fill(255, 255, 255);
+  textSize(80);
+  text("Game Over", 200, 300);
+  push();
+  textSize(40);
+  text("Try again", 320, 380);
+  text("Press space bar", 260, 420);
+  pop();
+}
 
 //collision part
 
@@ -142,10 +167,6 @@ function draw() {
   // drawMovingHorizontal();
   // spiningObstacle();
   movingRocket();
+  startScreen();
+  gameWon();
 }
-
-/* como fazer ele saber que bateu no que está girando
-pode ser fazendo vários círculos 
-ou pode ser com comparacao de cor - nao é muito efetivo
-porque faz o computador rodar muito
-ou movendo o background e deixando os obstaculos parados*/
