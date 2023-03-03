@@ -163,11 +163,11 @@ function gameWon() {
   background(255, 255, 255);
   fill(0, 0, 0);
   textSize(80);
-  text("You won!!", 220, 300);
+  text("YAY! You won!! :)", 100, 300);
   push();
   textSize(40);
-  text("Start again", 300, 380);
-  text("Press enter", 300, 420);
+  text("Play again", 280, 380);
+  text("Press enter", 275, 440);
   pop();
 }
 
@@ -176,11 +176,11 @@ function gameLost() {
   background(0, 0, 0);
   fill(255, 255, 255);
   textSize(80);
-  text("Game Over", 200, 300);
+  text(" Game Over!! :(", 100, 300);
   push();
   textSize(40);
-  text("Try again", 320, 380);
-  text("Press enter", 310, 420);
+  text("Try again", 280, 380);
+  text("Press enter", 265, 440);
   pop();
 }
 
