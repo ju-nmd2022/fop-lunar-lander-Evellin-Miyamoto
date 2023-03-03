@@ -1,7 +1,13 @@
 /* Lunar lander game 
 Foundations of Programming - Jönköping University
 Evellin Miyamoto */
-isGameActive = false;
+
+/*
+0- start screen
+1- Game mode
+2- win
+3- Lose */
+let screen = 0;
 
 function setup() {
   createCanvas(800, 650);
@@ -38,51 +44,7 @@ function drawStatic() {
   horizontalObstacle(700, 150, 1);
   horizontalObstacle(550, 300, 1);
 }
-
-// Draw moving verticalObstacle
-// let verticalY = 100;
-// let verticalSpeed = -3;
-
-// function drawMoving() {
-//   verticalObstacle(300, verticalY, 0);
-
-//   verticalY = verticalY - verticalSpeed;
-//   if (verticalY > 160 || verticalY < 10) {
-//     verticalSpeed = verticalSpeed * -1;
-//   }
-// }
-
-// // Draw moving Horizontal obstacle
-// let horizontalX = 600;
-// let horizontalSpeed = 2;
-
-// function drawMovingHorizontal() {
-//   horizontalObstacle(horizontalX, 200, 0);
-
-//   horizontalX = horizontalX - horizontalSpeed;
-//   if (horizontalX > 710 || horizontalX < 540) {
-//     horizontalSpeed = horizontalSpeed * -1;
-//   }
-// }
-
-// Draw spining whell
-/* Learned from p5.js - 
-https://editor.p5js.org/chjno/sketches/SJ2gSkAt-*/
-
-// let angle = 0;
-// function spiningObstacle() {
-//   push();
-//   translate(250, 445);
-//   angleMode(DEGREES);
-//   rotate(angle);
-//   rectMode(CENTER);
-//   rect(0, 0, 200, 30, 10);
-//   angle = angle + 1;
-//   pop();
-// }
-
 // Rocket
-
 function rocket(x, y) {
   push();
   translate(x, y);
@@ -105,6 +67,7 @@ let rocketX = 50;
 let rocketY = 50;
 let rocketVelocity = 0.3;
 let rocketAcceleration = 0.01;
+
 function movingRocket() {
   rocket(rocketX, rocketY);
   rocketVelocity = rocketVelocity + rocketAcceleration;
@@ -117,6 +80,10 @@ function movingRocket() {
   } else if (keyIsDown(37)) {
     rocketX = rocketX - 10;
   }
+}
+function gameMode() {
+  drawStatic();
+  movingRocket();
 }
 
 function startScreen() {
@@ -131,10 +98,10 @@ function startScreen() {
   pop();
   push();
   textSize(40);
-  text("To start the game press spacebar", 80, 500);
+  text("To start the game press enter", 110, 500);
 }
 
-function gameWon() {
+function gameWin() {
   background(255, 255, 255);
   fill(0, 0, 0);
   textSize(80);
@@ -142,7 +109,7 @@ function gameWon() {
   push();
   textSize(40);
   text("Start again", 300, 380);
-  text("Press space bar", 260, 420);
+  text("Press enter", 300, 420);
   pop();
 }
 
@@ -154,19 +121,36 @@ function gameLost() {
   push();
   textSize(40);
   text("Try again", 320, 380);
-  text("Press space bar", 260, 420);
+  text("Press enter", 310, 420);
   pop();
 }
 
-//collision part
+// different screens
+/* inspired by these references
+ https://editor.p5js.org/aferriss/sketches/rJwwjSvib
+https://www.youtube.com/watch?v=RlsRQS5qFSY */
 
-// Draw everything
 function draw() {
-  drawStatic();
-  // drawMoving();
-  // drawMovingHorizontal();
-  // spiningObstacle();
-  movingRocket();
-  startScreen();
-  gameWon();
+  if (screen === 0) {
+    startScreen();
+  } else if (screen === 1) {
+    gameMode();
+  } else if (screen === 2) {
+    gameWin();
+  } else if (screen === 3) {
+    gameLost();
+  }
+}
+
+function keyPressed() {
+  if (screen === 0 && keyCode === 13) {
+    screen = 1;
+    gameMode();
+  } else if (screen === 2 && keyCode === 13) {
+    screen = 1;
+    gameMode();
+  } else if (screen === 3 && keyCode === 13) {
+    screen = 1;
+    gameMode();
+  }
 }
