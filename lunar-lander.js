@@ -37,7 +37,7 @@ function drawStatic() {
   rect(-10, 600, 800, 35, 10);
   fill(187, 208, 255);
   ellipse(50, 20, 100, 10);
-  ellipse(50, 560, 100, 10);
+  ellipse(50, 540, 100, 100);
   verticalObstacle(100, 160, 0);
   verticalObstacle(515, 100, 80);
   verticalObstacle(460, 275, 80);
@@ -64,26 +64,34 @@ function rocket(x, y) {
   ellipse(x, y - 15, 10, 10);
 }
 
-// Making the rocket move
 let rocketX = 50;
 let rocketY = 50;
-let rocketVelocity = 0.3;
-let rocketAcceleration = 0.01;
+let rocketVelocity = 0.1;
+let rocketAcceleration = 0.2;
+
+function rocketSetup() {
+  // Making the rocket move
+  rocketX = 50;
+  rocketY = 50;
+  rocketVelocity = 0.1;
+  rocketAcceleration = 0.1;
+}
 
 function movingRocket() {
   rocket(rocketX, rocketY);
+
   rocketVelocity = rocketVelocity + rocketAcceleration;
   rocketY = rocketY + rocketVelocity;
 
   if (keyIsDown(38)) {
-    rocketY = rocketY - 10;
+    rocketVelocity = rocketVelocity - 0.5;
   } else if (keyIsDown(39)) {
-    rocketX = rocketX + 10;
+    rocketX = rocketX + 8;
   } else if (keyIsDown(37)) {
-    rocketX = rocketX - 10;
+    rocketX = rocketX - 8;
   }
 
-  // Collisions
+  // Collisions - lose
   if (rocketX > 0 && rocketX < 545 && rocketY > 230 && rocketY < 285) {
     screen = 3;
   } else if (rocketX > 85 && rocketX < 130 && rocketY > 160 && rocketY < 250) {
@@ -103,9 +111,14 @@ function movingRocket() {
   } else if (rocketX > 0 && rocketX < 800 && rocketY > 600) {
     screen = 3;
   }
+  // Land on the portal - win
+  else if (rocketX > 5 && rocketX < 95 && rocketY > 560) {
+    screen = 2;
+  }
 }
 function gameMode() {
   drawStatic();
+  // rocketSetup();
   movingRocket();
 }
 
@@ -174,6 +187,7 @@ function keyPressed() {
     gameMode();
   } else if (screen === 3 && keyCode === 13) {
     screen = 1;
+    rocketSetup();
     gameMode();
   }
 }
