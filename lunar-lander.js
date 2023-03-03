@@ -66,29 +66,32 @@ function rocket(x, y) {
 
 let rocketX = 50;
 let rocketY = 50;
-let rocketVelocity = 0.1;
+let rocketVelocityY = 0.1;
+let rocketVelocityX = 0;
 let rocketAcceleration = 0.2;
 
 function rocketSetup() {
   // Making the rocket move
   rocketX = 50;
   rocketY = 50;
-  rocketVelocity = 0.1;
+  rocketVelocityY = 0.1;
+  rocketVelocityX = 0;
   rocketAcceleration = 0.1;
 }
 
 function movingRocket() {
   rocket(rocketX, rocketY);
 
-  rocketVelocity = rocketVelocity + rocketAcceleration;
-  rocketY = rocketY + rocketVelocity;
+  rocketVelocityY = rocketVelocityY + rocketAcceleration;
+  rocketY = rocketY + rocketVelocityY;
+  rocketX = rocketX + rocketVelocityX;
 
   if (keyIsDown(38)) {
-    rocketVelocity = rocketVelocity - 0.5;
+    rocketVelocityY = rocketVelocityY - 0.5;
   } else if (keyIsDown(39)) {
-    rocketX = rocketX + 8;
+    rocketVelocityX = rocketVelocityX + 0.1;
   } else if (keyIsDown(37)) {
-    rocketX = rocketX - 8;
+    rocketVelocityX = rocketVelocityX - 0.1;
   }
 
   // Collisions - lose
@@ -129,8 +132,8 @@ function startScreen() {
   text("Land the Rocket!", 150, 200);
   push();
   textSize(25);
-  text("Use arrow up to control the velocity", 180, 300);
-  text("Move the rocket with arrow right", 190, 360);
+  text("Use the up arrow to fight gravity", 180, 300);
+  text("Use the side arrows to swindle", 190, 360);
   pop();
   push();
   textSize(40);
