@@ -10,7 +10,7 @@ Evellin Miyamoto */
 3- Lose */
 
 // Variables
-let screen = 3;
+let screen = 0;
 let rocketX = 50;
 let rocketY = 50;
 let rocketVelocityY = 0.1;
@@ -121,13 +121,17 @@ function movingRocket() {
   /* https://www.youtube.com/watch?v=Kp070rI_G48 
   wacthed this video to understand the mechanic*/
   if (rocketX < 0) {
+    rocketX = 1;
     rocketVelocityX = -rocketVelocityX * 1;
   } else if (rocketX > 800) {
+    rocketX = 799;
     rocketVelocityX = -rocketVelocityX * 1;
   } else if (rocketY < 0) {
-    rocketVelocityY = -rocketVelocityY * 0.95;
+    rocketY = 1;
+    rocketVelocityY = -rocketVelocityY * 1;
   } else if (rocketY > 600) {
-    rocketVelocityY = -rocketVelocityY * 0.95;
+    rocketY = 599;
+    rocketVelocityY = -rocketVelocityY * 1;
   }
 
   // Land on the portal to win
