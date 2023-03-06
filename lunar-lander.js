@@ -10,7 +10,7 @@ Evellin Miyamoto */
 3- Lose */
 
 // Variables
-let screen = 0;
+let screen = 3;
 let rocketX = 50;
 let rocketY = 50;
 let rocketVelocityY = 0.1;
@@ -40,10 +40,9 @@ function drawStatic() {
   background(20, 33, 61);
   fill(200, 182, 255);
   rect(-10, 250, 555, 35, 10);
-  rect(-10, 600, 800, 35, 10);
+  rect(-10, 600, 810, 35, 10);
   fill(187, 208, 255);
   ellipse(50, 20, 100, 10);
-  // ellipse(50, 540, 100, 100);
   ellipse(50, 560, 100, 10);
   verticalObstacle(100, 160, 0);
   verticalObstacle(515, 100, 80);
@@ -84,8 +83,9 @@ function rocketSetup() {
 function movingRocket() {
   rocket(rocketX, rocketY);
   //console.log(rocketVelocityY);
-  rocketVelocityY = rocketVelocityY + rocketAcceleration;
+
   rocketY = rocketY + rocketVelocityY;
+  rocketVelocityY = rocketVelocityY + rocketAcceleration;
   rocketX = rocketX + rocketVelocityX;
 
   if (keyIsDown(32)) {
@@ -117,8 +117,21 @@ function movingRocket() {
     screen = 3;
   }
 
-  //Land on the portal
-  else if (rocketX > 5 && rocketX < 95 && rocketY > 530) {
+  // Walls bounce
+  /* https://www.youtube.com/watch?v=Kp070rI_G48 
+  wacthed this video to understand the mechanic*/
+  if (rocketX < 0) {
+    rocketVelocityX = -rocketVelocityX * 1;
+  } else if (rocketX > 800) {
+    rocketVelocityX = -rocketVelocityX * 1;
+  } else if (rocketY < 0) {
+    rocketVelocityY = -rocketVelocityY * 0.95;
+  } else if (rocketY > 600) {
+    rocketVelocityY = -rocketVelocityY * 0.95;
+  }
+
+  // Land on the portal to win
+  if (rocketX > 5 && rocketX < 95 && rocketY > 530) {
     // Lost because the rocket was too fast
     if (rocketVelocityY > 3) {
       screen = 3;
@@ -143,28 +156,42 @@ function gameMode() {
 
 // First Screen
 function startScreen() {
-  background(255, 255, 255);
-  fill(0, 0, 0);
+  background(20, 33, 61);
+  noStroke();
+  fill(255, 214, 255, 10);
+  rect(120, 50, 560, 560, 50);
+  rect(110, 50, 560, 560, 50);
+  rect(105, 450, 580, 130, 50);
+  fill(181, 23, 158);
   textSize(60);
-  text("Land the Rocket!", 150, 200);
+  text("Space adventure", 170, 200);
   push();
+  fill(200, 182, 255);
   textSize(25);
-  text("Use the spacebar to fight gravity", 180, 300);
-  text("Use the side arrows to swindle", 190, 360);
-  text("Be carefull with the landing velocity...", 180, 420);
+  text("Use the spacebar to fight gravity", 220, 300);
+  text("Use the side arrows to swindle", 230, 360);
+  text("Be carefull with the landing velocity", 210, 420);
   pop();
-  push();
   textSize(40);
-  text("To start the game press enter", 110, 520);
+  text("To start the game press enter", 140, 520);
 }
 
 // Screen won
 function gameWon() {
   background(255, 255, 255);
-  fill(0, 0, 0);
+  noStroke();
+  fill(255, 214, 255, 80);
+  rect(80, 50, 620, 560, 50);
+  rect(100, 50, 620, 560, 50);
+  push();
+  fill(255, 214, 255, 150);
+  rect(100, 340, 600, 120, 50);
+  pop();
+  fill(181, 23, 158);
   textSize(80);
   text("YAY! You won!! :)", 100, 300);
   push();
+  fill(200, 182, 255);
   textSize(40);
   text("Play again", 280, 380);
   text("Press enter", 275, 440);
@@ -174,13 +201,19 @@ function gameWon() {
 // Screen lost
 function gameLost() {
   background(0, 0, 0);
-  fill(255, 255, 255);
+  noStroke();
+  fill(255, 214, 255, 10);
+  rect(120, 50, 560, 560, 50);
+  rect(110, 50, 560, 560, 50);
+  rect(120, 340, 550, 120, 50);
+  fill(181, 23, 158);
   textSize(80);
   text(" Game Over!! :(", 100, 300);
   push();
+  fill(200, 182, 255);
   textSize(40);
-  text("Try again", 280, 380);
-  text("Press enter", 265, 440);
+  text("Try again", 300, 380);
+  text("Press enter", 285, 440);
   pop();
 }
 
