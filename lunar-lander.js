@@ -97,25 +97,25 @@ function movingRocket() {
   }
 
   // Collisions - lose
-  // if (rocketX > 0 && rocketX < 545 && rocketY > 230 && rocketY < 285) {
-  //   screen = 3;
-  // } else if (rocketX > 85 && rocketX < 130 && rocketY > 160 && rocketY < 250) {
-  //   screen = 3;
-  // } else if (rocketX > 290 && rocketX < 330 && rocketY > 0 && rocketY < 145) {
-  //   screen = 3;
-  // } else if (rocketX > 508 && rocketX < 550 && rocketY > 90 && rocketY < 290) {
-  //   screen = 3;
-  // } else if (rocketX > 700 && rocketX < 800 && rocketY > 150 && rocketY < 185) {
-  //   screen = 3;
-  // } else if (rocketX > 550 && rocketX < 650 && rocketY > 300 && rocketY < 335) {
-  //   screen = 3;
-  // } else if (rocketX > 460 && rocketX < 490 && rocketY > 275 && rocketY < 460) {
-  //   screen = 3;
-  // } else if (rocketX > 320 && rocketX < 350 && rocketY > 430 && rocketY < 600) {
-  //   screen = 3;
-  // } else if (rocketX > 0 && rocketX < 800 && rocketY > 600) {
-  //   screen = 3;
-  // }
+  if (rocketX > 0 && rocketX < 545 && rocketY > 230 && rocketY < 285) {
+    screen = 3;
+  } else if (rocketX > 85 && rocketX < 130 && rocketY > 160 && rocketY < 250) {
+    screen = 3;
+  } else if (rocketX > 290 && rocketX < 330 && rocketY > 0 && rocketY < 145) {
+    screen = 3;
+  } else if (rocketX > 508 && rocketX < 550 && rocketY > 90 && rocketY < 290) {
+    screen = 3;
+  } else if (rocketX > 700 && rocketX < 800 && rocketY > 150 && rocketY < 185) {
+    screen = 3;
+  } else if (rocketX > 550 && rocketX < 650 && rocketY > 300 && rocketY < 335) {
+    screen = 3;
+  } else if (rocketX > 460 && rocketX < 490 && rocketY > 275 && rocketY < 460) {
+    screen = 3;
+  } else if (rocketX > 320 && rocketX < 350 && rocketY > 430 && rocketY < 600) {
+    screen = 3;
+  } else if (rocketX > 0 && rocketX < 800 && rocketY > 600) {
+    screen = 3;
+  }
 
   // Walls bounce
   /* https://www.youtube.com/watch?v=Kp070rI_G48 
