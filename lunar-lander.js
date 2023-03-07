@@ -52,6 +52,7 @@ function drawStatic() {
   horizontalObstacle(700, 150, 1);
   horizontalObstacle(550, 300, 1);
 }
+
 // Rocket
 function rocket(x, y) {
   push();
@@ -70,7 +71,7 @@ function rocket(x, y) {
   ellipse(x, y - 15, 10, 10);
 }
 
-// Redefine rocket position in the begining or every screen
+// Redefine rocket position in the beginning of every screen
 function rocketSetup() {
   rocketX = 50;
   rocketY = 50;
@@ -82,7 +83,6 @@ function rocketSetup() {
 // Making the rocket move
 function movingRocket() {
   rocket(rocketX, rocketY);
-  //console.log(rocketVelocityY);
 
   rocketY = rocketY + rocketVelocityY;
   rocketVelocityY = rocketVelocityY + rocketAcceleration;
@@ -151,11 +151,53 @@ function movingRocket() {
     }
   }
 }
+
+//Adapted code learned from Garrit's class
+let particles = [];
+
+function createParticle(x, y) {
+  const v = 0.2 + Math.random();
+  const a = Math.PI + Math.random() * Math.PI;
+  const maxLife = 1 + Math.floor(Math.random() * 100);
+  return { x: x, y: y, velocity: v, angle: a, life: 0, maxLife: maxLife };
+}
+
+function drawParticle(particle) {
+  push();
+  translate(particle.x, particle.y);
+  noStroke();
+  fill(255, 255, 255, 20);
+  ellipse(0, 0, 10);
+  pop();
+}
+
+function updateParticle(particle) {
+  particle.x = particle.x + Math.cos(particle.angle) * particle.velocity;
+  particle.y = particle.y + Math.sin(particle.angle) * particle.velocity;
+  particle.velocity = particle.velocity * 1;
+  particle.life = particle.life + 10;
+
+  if (particle.life > particle.maxLife) {
+    const particleIndex = particles.indexOf(particle);
+    particles.splice(particleIndex, 1);
+  }
+}
+
 // The game mode with all mechanics
 function gameMode() {
   drawStatic();
-  // rocketSetup();
   movingRocket();
+  //adapted particles form Garrit's class
+  for (let particle of particles) {
+    drawParticle(particle);
+    updateParticle(particle);
+  }
+  if (keyIsDown(32)) {
+    for (let i = 0; i < 200; i++) {
+      let particle = createParticle(rocketX, rocketY + 30);
+      particles.push(particle);
+    }
+  }
 }
 
 // First Screen
@@ -165,7 +207,7 @@ function startScreen() {
   fill(255, 214, 255, 10);
   rect(120, 50, 560, 560, 50);
   rect(110, 50, 560, 560, 50);
-  rect(105, 450, 580, 130, 50);
+  rect(120, 450, 550, 130, 50);
   fill(181, 23, 158);
   textSize(60);
   text("Space adventure", 170, 200);
